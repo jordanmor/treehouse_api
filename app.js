@@ -1,24 +1,31 @@
 const https = require('https');
-const username = 'jordanmor';
 
-function printMessage(username, badgeCount, point) {
-	const message = `${username} has ${badgeCount} total badge(s) and ${point} points in JavaScript`;
+function printMessage(name, badgeCount, point) {
+	const message = `${name} has ${badgeCount} total badge(s) and ${point} total points.`;
 	console.log(message);
 }
 
-const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
-	// console.log(response.statusCode);
+function getProfile(username) {
 
-	let body = '';
+	const request = https.get(`https://teamtreehouse.com/${username}.json`, response => {
+		// console.log(response.statusCode);
 
-	response.on('data', data => {
-		body += data.toString();
-	})
+		let body = '';
 
-	response.on('end', () => {
-		const profile = JSON.parse(body);
-		printMessage(username, profile.badges.length, profile.points.JavaScript);
+		response.on('data', data => {
+			body += data.toString();
+		})
+
+		response.on('end', () => {
+			const profile = JSON.parse(body);
+			printMessage(profile.name, profile.badges.length, profile.points.total);
+		});
+
 	});
 
-});
+}
+const users = process.argv.slice(2);
+
+users.forEach(getProfile);
+
 
