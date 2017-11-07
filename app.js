@@ -1,16 +1,30 @@
 const profile = require('./profile');
-var prompt = require('prompt');
+const topic = require('./topic');
+const readline = require('readline');
 
-prompt.start();
-
-prompt.get(['username', 'topic'], function (err, result) {
-   if (err) { return onErr(err); }
-   profile.get(result.username, result.topic);
-   
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
 });
 
-function onErr(err) {
-  console.log(err);
-  return 1;
-}
+console.log('');
 
+rl.question('Enter username:', (answer) => {
+  console.log('');
+  const username = answer;
+  topic.list(username);
+
+  function secondInput() {
+  	console.log('');
+  	rl.question('Choose topic:', (answer) => {
+		const chosenTopic = answer;
+		console.log('');
+		profile.get(username, chosenTopic);
+
+		rl.close();
+	});
+  }
+
+  setTimeout(secondInput, 8000);
+
+});
