@@ -2,7 +2,7 @@ const https = require('https');
 const http = require('http');
 const print = require('./print');
 
-function get(username) {
+function get(username, topic) {
 
 	try {
 
@@ -18,7 +18,8 @@ function get(username) {
 				response.on('end', () => {
 					try {
 						const profile = JSON.parse(body);
-						print.message(profile.name, profile.badges.length, profile.points.total);
+
+						print.message(profile.name, profile.badges.length, profile.points[topic], topic);
 					} catch (error) {
 						print.error(error);
 					}
