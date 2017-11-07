@@ -1,7 +1,16 @@
 const profile = require('./profile');
+var prompt = require('prompt');
 
-const users = process.argv.slice(2);
+prompt.start();
 
-users.forEach(profile.get);
+prompt.get(['username', 'topic'], function (err, result) {
+   if (err) { return onErr(err); }
+   profile.get(result.username, result.topic);
+   
+});
 
+function onErr(err) {
+  console.log(err);
+  return 1;
+}
 
