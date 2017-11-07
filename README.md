@@ -1,15 +1,22 @@
 # treehouse_api
-Command-line application to retrieve student's profile information from the Treehouse API using node.js
+Command-line application to retrieve Treehouse student's full name, badge count 
+and points for a chosen topic from the Treehouse API using node.js
 
 # Directions for use
-Prerequisite: node.js installed
+Prerequisites: 
+	- node.js pre-installed
+	- npm package prompt
 
-Clone repository. 
+Install npm package prompt with the following command:
+npm install prompt
 
-Type into command line: node app.js username
+Clone repository and install in local folder of your choice. 
 
-The app will return info on multiple users. Usernames must be spaced apart by one space.
+Start program by typing into command line: node app.js
 
-Ex. node app.js chalkers davemcfarland
+First prompt will ask for a Treehouse username
 
-This app will retrieve a usernames full name, total badge count and total points from the Treehouse API.
+Second prompt will ask for a Treehouse topic area (ex. JavaScript ,CSS, etc.)
+
+The app will retrieve the username's full name, badge count and points 
+for the chosen topic from the Treehouse API.
